@@ -521,7 +521,7 @@ a { text-decoration: none; color: inherit; }
   color: #000;
 }
 
-.snippet-code {
+/* .snippet-code {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1.65;
@@ -529,6 +529,21 @@ a { text-decoration: none; color: inherit; }
   color: var(--text-dim);
   overflow-x: auto;
   white-space: pre;
+}
+ */
+
+ .snippet-code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.65;
+  padding: 0.75rem 0.9rem;
+  color: var(--text-dim);
+  
+  /* --- ADD THESE LINES --- */
+  max-height: 250px;    /* Limits the height of the code box */
+  overflow-y: auto;     /* Enables vertical scrolling */
+  overflow-x: auto;     /* Enables horizontal scrolling for long lines */
+  white-space: pre;     /* Keeps your code formatting intact */
 }
 
 /* ============================================================
