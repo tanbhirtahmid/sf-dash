@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shifat's Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== PASSWORD LOCK SCREEN ===================== -->
+  <div id="lock-screen" class="lock-screen">
+    <div class="lock-card">
+      <div class="lock-logo">⬡</div>
+      <h1 class="lock-title">DASHBOARD</h1>
+      <p class="lock-sub">Enter access key to continue</p>
+      <div class="lock-input-wrap">
+        <input type="password" id="password-input" class="lock-input" placeholder="••••••••" autocomplete="off" />
+        <button id="unlock-btn" class="lock-btn">UNLOCK</button>
+      </div>
+      <p id="lock-error" class="lock-error"></p>
+      <p class="lock-hint">Default: <code>1234</code> — change in script.js</p>
+    </div>
+  </div>
+
+  <!-- ===================== MAIN DASHBOARD ===================== -->
+  <div id="dashboard" class="dashboard hidden">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="header-left">
+        <span class="header-logo">⬡</span>
+        <span class="header-title">DASHBOARD</span>
+      </div>
+      <div class="header-center">
+        <div id="clock" class="clock"></div>
+        <div id="date-display" class="date-display"></div>
+      </div>
+      <div class="header-right">
+        <!-- Search bar -->
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search..." />
+        </div>
+        <!-- Focus mode toggle -->
+        <button id="focus-btn" class="icon-btn" title="Focus Mode (F)">◎</button>
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="icon-btn" title="Toggle Theme (T)">◐</button>
+      </div>
+    </header>
+
+    <!-- ===== FOCUS MODE BANNER (shown only in focus mode) ===== -->
+    <div id="focus-banner" class="focus-banner hidden">
+      <span>⚡ FOCUS MODE — showing essentials only</span>
+      <button id="exit-focus-btn" class="focus-exit-btn">Exit Focus ✕</button>
+    </div>
+
+    <!-- ===== MAIN GRID ===== -->
+    <main class="main-grid" id="main-grid">
+
+      <!-- === A. QUICK ACCESS === -->
+      <section class="card quick-access-card" data-section="quick-access">
+        <div class="card-header">
+          <span class="card-icon">⚡</span>
+          <h2 class="card-title">Quick Access</h2>
+        </div>
+        <div class="quick-links" id="quick-links">
+          <a href="https://docs.google.com/spreadsheets" target="_blank" class="ql-btn searchable" data-label="Google Sheets Problem List Problems">
+            <span class="ql-icon">📊</span>
+            <span class="ql-text">
+              <span class="ql-name">Problem Sheet</span>
+              <span class="ql-sub">Google Sheets</span>
+            </span>
+          </a>
+          <a href="https://notion.so" target="_blank" class="ql-btn searchable" data-label="Notion Notes Pages">
+            <span class="ql-icon">📝</span>
+            <span class="ql-text">
+              <span class="ql-name">Notion</span>
+              <span class="ql-sub">Notes &amp; Pages</span>
+            </span>
+          </a>
+          <a href="https://drive.google.com" target="_blank" class="ql-btn searchable" data-label="Google Drive Books Resources">
+            <span class="ql-icon">📚</span>
+            <span class="ql-text">
+              <span class="ql-name">Drive Books</span>
+              <span class="ql-sub">Google Drive</span>
+            </span>
+          </a>
+          <a href="https://github.com" target="_blank" class="ql-btn searchable" data-label="GitHub Repositories Code">
+            <span class="ql-icon">🐙</span>
+            <span class="ql-text">
+              <span class="ql-name">GitHub</span>
+              <span class="ql-sub">Repositories</span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- === B. CODING SECTION === -->
+      <section class="card coding-card focus-keep" data-section="coding">
+        <div class="card-header">
+          <span class="card-icon">⌨</span>
+          <h2 class="card-title">Coding</h2>
+        </div>
+
+        <div class="sub-label">Online Compilers</div>
+        <div class="compiler-links" id="compiler-links">
+          <a href="https://replit.com" target="_blank" class="compiler-btn searchable focus-keep" data-label="Replit Online Compiler IDE">
+            <span class="cl-dot"></span>Replit
+          </a>
+          <a href="https://www.onlinegdb.com" target="_blank" class="compiler-btn searchable focus-keep" data-label="OnlineGDB Compiler Debugger">
+            <span class="cl-dot"></span>OnlineGDB
+          </a>
+          <a href="https://godbolt.org" target="_blank" class="compiler-btn searchable focus-keep" data-label="Godbolt Compiler Explorer Assembly">
+            <span class="cl-dot"></span>Godbolt
+          </a>
+          <a href="https://codeforces.com" target="_blank" class="compiler-btn searchable focus-keep" data-label="Codeforces Competitive Programming">
+            <span class="cl-dot"></span>Codeforces
+          </a>
+        </div>
+
+        <!-- Code Snippets -->
+        <div class="sub-label" style="margin-top:1.4rem;">Code Snippets</div>
+        <div class="snippets" id="snippets">
+
+          <div class="snippet-card searchable" data-label="Binary Search Template Algorithm">
+            <div class="snippet-header">
+              <div class="snippet-meta">
+                <span class="snippet-lang">C++</span>
+                <span class="snippet-name">Binary Search</span>
+              </div>
+              <button class="copy-btn" data-target="snip-bsearch">Copy</button>
+            </div>
+            <pre id="snip-bsearch" class="snippet-code">int lo = 0, hi = n - 1;
+while (lo &lt;= hi) {
+  int mid = lo + (hi - lo) / 2;
+  if (arr[mid] == target) return mid;
+  else if (arr[mid] &lt; target) lo = mid + 1;
+  else hi = mid - 1;
+}
+return -1; // not found</pre>
+          </div>
+
+          <div class="snippet-card searchable" data-label="BFS Breadth First Search Graph Template">
+            <div class="snippet-header">
+              <div class="snippet-meta">
+                <span class="snippet-lang">C++</span>
+                <span class="snippet-name">BFS</span>
+              </div>
+              <button class="copy-btn" data-target="snip-bfs">Copy</button>
+            </div>
+            <pre id="snip-bfs" class="snippet-code">queue&lt;int&gt; q;
+vector&lt;bool&gt; vis(n, false);
+q.push(src); vis[src] = true;
+while (!q.empty()) {
+  int u = q.front(); q.pop();
+  for (int v : adj[u]) {
+    if (!vis[v]) { vis[v] = true; q.push(v); }
+  }
+}</pre>
+          </div>
+
+          <div class="snippet-card searchable" data-label="Sieve Eratosthenes Prime Numbers">
+            <div class="snippet-header">
+              <div class="snippet-meta">
+                <span class="snippet-lang">C++</span>
+                <span class="snippet-name">Sieve of Eratosthenes</span>
+              </div>
+              <button class="copy-btn" data-target="snip-sieve">Copy</button>
+            </div>
+            <pre id="snip-sieve" class="snippet-code">vector&lt;bool&gt; sieve(int n) {
+  vector&lt;bool&gt; is_prime(n+1, true);
+  is_prime[0] = is_prime[1] = false;
+  for (int i = 2; i*i &lt;= n; i++)
+    if (is_prime[i])
+      for (int j = i*i; j &lt;= n; j += i)
+        is_prime[j] = false;
+  return is_prime;
+}</pre>
+          </div>
+
+          <div class="snippet-card searchable" data-label="Fast IO Boilerplate C++ Competitive Programming">
+            <div class="snippet-header">
+              <div class="snippet-meta">
+                <span class="snippet-lang">C++</span>
+                <span class="snippet-name">Fast I/O Boilerplate</span>
+              </div>
+              <button class="copy-btn" data-target="snip-fastio">Copy</button>
+            </div>
+            <pre id="snip-fastio" class="snippet-code">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define ll long long
+#define vi vector&lt;int&gt;
+#define pii pair&lt;int,int&gt;
+
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  // your code here
+  return 0;
+}</pre>
+          </div>
+
+          <div class="snippet-card searchable" data-label="DFS Depth First Search Graph Template">
+            <div class="snippet-header">
+              <div class="snippet-meta">
+                <span class="snippet-lang">C++</span>
+                <span class="snippet-name">DFS</span>
+              </div>
+              <button class="copy-btn" data-target="snip-dfs">Copy</button>
+            </div>
+            <pre id="snip-dfs" class="snippet-code">vector&lt;bool&gt; vis(n, false);
+void dfs(int u) {
+  vis[u] = true;
+  for (int v : adj[u])
+    if (!vis[v]) dfs(v);
+}</pre>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- === C. TOOLS SECTION === -->
+      <section class="card tools-card" data-section="tools">
+        <div class="card-header">
+          <span class="card-icon">🛠</span>
+          <h2 class="card-title">Tools</h2>
+        </div>
+
+        <!-- Clipboard -->
+        <div class="sub-label">Clipboard</div>
+        <textarea id="clipboard-area" class="tool-textarea" placeholder="Paste or type anything here — saves automatically..."></textarea>
+        <div class="tool-actions">
+          <span id="clipboard-status" class="save-status"></span>
+          <button id="clear-clipboard" class="tool-btn danger">Clear</button>
+        </div>
+
+        <!-- Quick Notes -->
+        <div class="sub-label" style="margin-top:1.4rem;">Quick Notes</div>
+        <textarea id="notes-area" class="tool-textarea notes-tall" placeholder="Jot down thoughts, tasks, reminders..."></textarea>
+        <div class="tool-actions">
+          <span id="notes-status" class="save-status"></span>
+          <button id="clear-notes" class="tool-btn danger">Clear</button>
+        </div>
+      </section>
+
+      <!-- === D. STUDY SECTION === -->
+      <section class="card study-card" data-section="study">
+        <div class="card-header">
+          <span class="card-icon">📖</span>
+          <h2 class="card-title">Study</h2>
+        </div>
+        <div class="study-links" id="study-links">
+          <a href="https://docs.google.com/spreadsheets" target="_blank" class="study-btn searchable" data-label="Problem Solving Sheet Track Progress">
+            <span class="study-icon">📊</span><span>Problem Sheet</span>
+          </a>
+          <a href="https://notion.so" target="_blank" class="study-btn searchable" data-label="Study Notes Notion">
+            <span class="study-icon">📓</span><span>Notes</span>
+          </a>
+          <a href="https://cp-algorithms.com" target="_blank" class="study-btn searchable" data-label="CP Algorithms Resources Reference">
+            <span class="study-icon">🧮</span><span>CP Algorithms</span>
+          </a>
+          <a href="https://cses.fi/problemset/" target="_blank" class="study-btn searchable" data-label="CSES Problem Set Practice">
+            <span class="study-icon">🏆</span><span>CSES Problem Set</span>
+          </a>
+          <a href="https://visualgo.net" target="_blank" class="study-btn searchable" data-label="VisuAlgo Algorithm Visualization">
+            <span class="study-icon">🔬</span><span>VisuAlgo</span>
+          </a>
+          <a href="https://leetcode.com" target="_blank" class="study-btn searchable" data-label="LeetCode Interview Practice">
+            <span class="study-icon">⚔️</span><span>LeetCode</span>
+          </a>
+          <a href="https://atcoder.jp" target="_blank" class="study-btn searchable" data-label="AtCoder Competitive Programming Contests">
+            <span class="study-icon">🎯</span><span>AtCoder</span>
+          </a>
+          <a href="https://www.youtube.com/@NeetCode" target="_blank" class="study-btn searchable" data-label="NeetCode YouTube DSA Video Resources">
+            <span class="study-icon">▶️</span><span>NeetCode</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span>Shifat's Dashboard · All data stored locally in your browser · <a href="https://github.com" target="_blank" class="footer-link">GitHub</a></span>
+    </footer>
+
+  </div>
+
+  <!-- Copy success toast notification -->
+  <div id="toast" class="toast hidden">✓ Copied to clipboard!</div>
+
+  <!-- No-results message for search -->
+  <div id="no-results" class="no-results hidden">No matches found</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
