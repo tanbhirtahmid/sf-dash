@@ -8,7 +8,7 @@
    CONFIG — CHANGE THESE TO PERSONALISE
    ============================================================ */
 const CONFIG = {
-  PASSWORD: "1234",           // <<< Change this to your password
+  PASSWORD: "code@#",           // <<< Change this to your password
   CLOCK_24H: true,            // true = 24h, false = 12h AM/PM
   SAVE_DEBOUNCE_MS: 600,      // ms delay before autosaving textarea
 };
