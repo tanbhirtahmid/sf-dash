@@ -1,4 +1,4 @@
-# ⬡ Shifat's Personal Dashboard
+# ⬡ My Personal Dashboard
 
 A fast, beautiful, fully client-side personal productivity hub. No backend, no dependencies (except Google Fonts).
 
